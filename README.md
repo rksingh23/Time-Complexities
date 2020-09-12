@@ -7,8 +7,8 @@ Try to guess the time complexity of some curated expamples having functions..!!!
 ```cpp
 int Example1(int n) {
    int count = 0;                         //O(1)  n=10
-   for (int i = n; i > 0; i /= 2) {      // n,n/2,n/4,.....1 = O(log n) 10,5,2,1,0
-       for (int j = 0; j < i; j++) {      //O(k)=O(n) 
+   for (int i = n; i > 0; i /= 2) {      // n,n/2,n/4,.....1 = O(log n) 
+       for (int j = 0; j < i; j++) {      0-n/2, 0-n/4.......0-1  O(n/(2^i))=O(n), 
            count += 1;                    O(1)
        }
    }
@@ -49,16 +49,16 @@ Answer:O(1)+O(n/2)*O(2^n)*O(2^n)=O(n*(logn)^2)
 void Example4(int n) {
    int count = 0;                            O(1) n=10
    for (int i=0; i<n; i++)                   O(n) 0-9
-       for (int j=i; j< i*i; j++)            O(n^2) 0,1, (2)2,3/ (3),3,4,5,6,7,8/ (4),4,5,6,7,8,9,10,11,12,13
-           if (j%i == 0)                     
+       for (int j=i; j< i*i; j++)            O(n^2) 0,1, (2)2,3/ (3),3,4,5,6,7,8/ (4),4,5,6,7,8,9,10,11,12,13,14,15/ (i=5),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
+           if (j%i == 0)                     (i=2,2) / (i=3,3,6) / (i=4,4,8,12) / (i=5,5,10,15,20)               O(j/n)
            {
-               for (int k=0; k<j; k++)       O(n^2) 0,1,2,3
+               for (int k=0; k<j; k++)       O(j/n) Assuming j is O(n^2) : O(j)=O(n^2)/O(n)=O(n)
                    cout<<"*";                O(1)
            }
 }
 ```
 
-Answer: O(n*n^2*n/2)=n^5
+Answer: O(n*n^2*n)=n^4
 
 ## FUN FACT
 
